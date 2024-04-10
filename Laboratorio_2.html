@@ -1,0 +1,75 @@
+<html>
+    <head>
+
+    </head>
+
+    <body>
+
+        <p>1R: Java Script es un lenguaje de scripting multiplataforma orientado a objetos y de parecido solo tienen el nombre como: "Java is to Java Script as Ham is to Hamster"<br>
+           2R: <label id="respuesta2"></label><br>
+           3R: <label id="respuesta3"></label><br>
+           4R: <label id="respuesta4"></label><br>
+           5R: <label id="respuesta5"></label><br>
+           6R: <label id="respuesta6"></label><br>
+        </p>
+    
+    
+    </body>
+
+
+</html>
+
+<Script>
+//RESPUESTA 2
+var a = 10;
+var b = 5;
+var objetivo = document.getElementById('respuesta2');
+objetivo.innerHTML = "Suma = "+ (a+b) +" Resta= "+ (a-b)+ " Multiplicación= " +(a*b) +" División= " +(a/b);
+//Respuesta 3 
+let x="hola";
+let y="mundo";
+var objetivo = document.getElementById('respuesta3');
+objetivo.innerHTML = x+y;
+objetivo.innerHTML = " " +x+y;
+//Respuesta 4 
+const pi = 3.14;
+const c = "DSIX";
+var objetivo = document.getElementById('respuesta4');
+objetivo.innerHTML = "PI: "+typeof(pi)+" OTRA: "+typeof(c);
+//Respuesta 5 
+var foo = { 2 : "two",
+    cadena: "cadena",
+    booleano: true, 
+    "":"vacio"};
+
+    var objetivo = document.getElementById('respuesta5');
+objetivo.innerHTML = foo[2]+" " +foo.cadena + " " +foo.booleano +" "+ foo[""];
+
+//Respuesta 6 
+var numero=10;
+function Multiplos(){
+var resp=0
+    for (i=0;i<numero;i++){
+
+        if (i%3==0){
+            
+            resp+= i;
+
+        }
+        else if (i%5==0){
+            
+            resp+= i;
+
+        }
+
+}
+
+return resp 
+}
+
+var objetivo = document.getElementById('respuesta6');
+objetivo.innerHTML = ""+ Multiplos();
+
+
+
+</Script>
