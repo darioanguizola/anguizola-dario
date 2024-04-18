@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laboratorio # 3 JavaScript</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>Laboratorio # 3</h1>
+
+    <label for="inputPalindromo">Ingresa un número:</label>
+    <input type="text" id="inputPalindromo" placeholder="3.1416" >
+
+    <button onclick="calcularPalindromo()">Comprobar Palíndromo</button>
+    <p id="resultadoPalindromo"></p>
+
+    <label for="inputContarCaracter">Ingresa una frase:</label>
+    <input type="text" id="inputContarCaracter" placeholder="HolamundoXDD">
+
+    <button onclick="contarCaracteres()">Contar Caracteres</button>
+    <p id="resultadoContarCaracter"></p>
+
+    <label for="inputCalculaBisiesto">Ingresa un año:</label>
+    <input type="text" id="inputCalculaBisiesto" placeholder="2024" >
+
+    <button onclick="calcularBisiesto()">Comprobar Año Bisiesto</button>
+    <p id="resultadoCalculaBisiesto"></p>
+
+    <label for="inputSumaTotal">Ingresa un número entero:</label>
+    <input type="text" id="inputSumaTotal" placeholder="7" >
+
+    <button onclick="calcularSumaTotal()">Calcular Suma Total</button>
+    <p id="resultadoSumaTotal"></p>
+</div>
+
+<script src="Laboratorio_3.js"></script>
+<script>
+    function calcularPalindromo() {
+        const inputPalindromo = document.getElementById('inputPalindromo').value;
+        const resultadoPalindromo = document.getElementById('resultadoPalindromo');
+        resultadoPalindromo.innerText = Palindromo(inputPalindromo);
+    }
+
+    function contarCaracteres() {
+        const inputContarCaracter = document.getElementById('inputContarCaracter').value;
+        const resultadoContarCaracter = document.getElementById('resultadoContarCaracter');
+        resultadoContarCaracter.innerText = JSON.stringify(ContarCarater(inputContarCaracter));
+    }
+
+    function calcularBisiesto() {
+        const inputCalculaBisiesto = document.getElementById('inputCalculaBisiesto').value;
+        const resultadoCalculaBisiesto = document.getElementById('resultadoCalculaBisiesto');
+        resultadoCalculaBisiesto.innerText = CalculaBisiesto(parseInt(inputCalculaBisiesto));
+    }
+
+    function calcularSumaTotal() {
+        const inputSumaTotal = document.getElementById('inputSumaTotal').value;
+        const resultadoSumaTotal = document.getElementById('resultadoSumaTotal');
+        resultadoSumaTotal.innerText = "La suma total del número brindado es: " + SumaTotal(parseInt(inputSumaTotal));
+    }
+</script>
+</body>
+</html>
