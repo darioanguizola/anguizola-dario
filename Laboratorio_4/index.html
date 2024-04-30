@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio #4</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f0f0f0; /* Color gris suave */
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #8B0000; /* Cambio de color a rojo más vino */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            align-self: flex-end; /* Botón alineado a la derecha */
+        }
+
+        button[type="submit"]:hover {
+            background-color: #730000; /* Cambio de tono de rojo al hacer hover */
+            box-shadow: 0 0 10px rgba(139, 0, 0, 0.5);
+        }
+
+        #fibonacci-title {
+            font-weight: bold; /* Texto en negrita */
+            margin-bottom: 10px; /* Espacio entre el título y el enunciado */
+            align-self: flex-start; /* Título alineado a la izquierda */
+        }
+
+        #response {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            margin-top: 20px; /* Espacio entre el formulario y las tarjetas */
+        }
+
+        .card {
+            padding: 1rem;
+            border: 1px solid grey;
+            margin: 1rem;
+            background-color: #f0f0f0; /* Color gris suave */
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section>
+            <h2 id="fibonacci-title">Secuencia Fibonacci</h2> <!-- Título agregado -->
+            <form id="fibonacci">
+                <label for="size">Cantidad de números de la serie de Fibonacci:</label>
+                <input id="size" type="text">
+                <button type="submit">Calcular</button>
+            </form>
+        </section>
+    </div>
+    <div id="response"></div> <!-- Movido fuera del contenedor principal -->
+    <script src="utils.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
