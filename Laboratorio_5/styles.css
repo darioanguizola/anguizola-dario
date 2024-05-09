@@ -1,0 +1,59 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+#form {
+    margin: 20px;
+}
+
+#form input[type="text"],
+#form input[type="color"],
+#form button {
+    margin-right: 10px;
+}
+
+#candidates-list {
+    margin: 20px;
+}
+
+.candidate {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.color-indicator {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.bar {
+    height: 20px;
+    border-radius: 10px;
+    background-color: #ccc; /* Color de fondo */
+    transition: width 0.5s ease;
+}
+
+.candidate span {
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+.candidate button {
+    margin-left: auto;
+    cursor: pointer;
+    border: none;
+    background-color: #f44336;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.candidate button:hover {
+    background-color: #d32f2f;
+}
