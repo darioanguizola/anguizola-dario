@@ -1,35 +1,43 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gráfico de Torta</title>
-    <style>
-        button {
-            padding: 10px 20px;
-            margin: 10px;
-            font-size: 16px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
- 
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Votación</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <canvas id="myCanvas"></canvas>
-    <button onclick="PieChartModule.agregarNuevoGenero()">Agregar Candidato</button>
-    <button onclick="PieChartModule.eliminarGenero()">Eliminar Candidato</button>
-    <script src="app.js"></script>
-    <script>
-        // Aquí puedes llamar a las funciones del módulo PieChartModule para interactuar con el gráfico de torta
-   
-    </script>
+  <div id="app">
+    <h1>Sistema de Votación</h1>
+    <div class="container">
+      <div class="column">
+        <div class="card">
+          <h2>Añadir Candidato</h2>
+          <form id="form">
+            <input type="text" name="name" placeholder="Nombre del candidato">
+            <input type="color" name="color">
+            <button type="submit">Agregar Candidato</button>
+          </form>
+        </div>
+        <div class="card" id="candidatesCard">
+          <h2>Candidatos</h2>
+          <div id="results"></div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="card" id="chartCard">
+          <h2>Gráfico de Barras</h2>
+          <div id="chart"></div>
+        </div>
+        <div class="card" id="pieChartCard">
+          <h2>Gráfico de Pie</h2>
+          <canvas id="pieChartCanvas" width="200" height="200"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
