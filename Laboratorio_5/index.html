@@ -1,23 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Candidatos</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Gráfico de Torta</title>
+    <style>
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+ 
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <div id="form">
-        <form id="candidate-form">
-            <input type="text" id="name" placeholder="Nombre del candidato">
-            <input type="color" id="color" value="#ff0000">
-            <button type="submit">Agregar Candidato</button>
-        </form>
-    </div>
-    <div id="candidates-list">
-        <!-- Aquí se mostrarán los candidatos -->
-    </div>
-
-    <script src="app.js" type="module"></script>
+    <canvas id="myCanvas"></canvas>
+    <button onclick="PieChartModule.agregarNuevoGenero()">Agregar Candidato</button>
+    <button onclick="PieChartModule.eliminarGenero()">Eliminar Candidato</button>
+    <script src="app.js"></script>
+    <script>
+        // Aquí puedes llamar a las funciones del módulo PieChartModule para interactuar con el gráfico de torta
+   
+    </script>
 </body>
 </html>
