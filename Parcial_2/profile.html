@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-left">
+            <button id="menuToggle" class="menu-button">☰</button>
+            <div id="menu" class="menu">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="profile.html">Perfil</a>
+                <button id="logoutMenu">Cerrar Sesión</button>
+            </div>
+        </div>
+        <div class="nav-right">
+            <span id="usernameDisplay"></span>
+            <a href="profile.html">Perfil</a>
+            <button id="logoutButton">Cerrar Sesión</button>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="card login-card">
+            <h2>Perfil</h2>
+        <form id="profileForm">
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" class="input-login"required>
+            <label for="password">Nueva Contraseña:</label>
+            <input type="password" id="password" class="input-loginpsw">
+            <button type="submit">Actualizar</button>
+        </form>
+        </div>
+         
+       
+    </div>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/profile.js"></script>
+    <script>
+        document.getElementById('profileForm').addEventListener('submit', handleProfileUpdate);
+        document.getElementById('logoutButton').addEventListener('click', handleLogout);
+        document.getElementById('logoutMenu').addEventListener('click', handleLogout);
+        document.getElementById('menuToggle').addEventListener('click', toggleMenu);
+        document.addEventListener('DOMContentLoaded', loadProfile);
+        
+    </script>
+</body>
+</html>
