@@ -1,75 +1,120 @@
-function loadDashboard() {
-    const username = getSession();
-    if (!username) {
-        window.location.href = 'index.html';
-        return;
-    }
+(() => {
+    const DashboardModule = {
+        htmlElements: {
+            transactionForm: document.getElementById('transactionForm'),
+            transactionTableBody: document.getElementById('transactionTable').querySelector('tbody'),
+            barEntradas: document.getElementById('barEntradas'),
+            barSalidas: document.getElementById('barSalidas'),
+            menuToggle: document.getElementById('menuToggle'),
+            logoutButton: document.getElementById('logoutButton'),
+            logoutMenu: document.getElementById('logoutMenu'),
+            usernameDisplay: document.getElementById('usernameDisplay')
+        },
 
-    // Limpiar datos almacenados al cargar el dashboard
-    localStorage.removeItem('transactions');
+        init() {
+            this.bindEvents();
+            this.methods.loadDashboard();
+        },
 
-    document.getElementById('usernameDisplay').textContent = username;
-    updateTransactionTable();
-    updateTransactionChart();
-}
+        bindEvents() {
+            this.htmlElements.transactionForm.addEventListener('submit', this.handlers.handleTransaction);
+            this.htmlElements.logoutButton.addEventListener('click', this.handlers.handleLogout);
+            this.htmlElements.logoutMenu.addEventListener('click', this.handlers.handleLogout);
+            this.htmlElements.menuToggle.addEventListener('click', this.handlers.toggleMenu);
+            document.addEventListener('DOMContentLoaded', this.methods.loadDashboard);
+        },
 
-function handleTransaction(event) {
-    event.preventDefault();
-    const type = document.getElementById('type').value;
-    const amount = parseFloat(document.getElementById('amount').value);
+        handlers: {
+            handleTransaction(event) {
+                event.preventDefault();
+                const type = DashboardModule.htmlElements.transactionForm.querySelector('#type').value;
+                const amount = parseFloat(DashboardModule.htmlElements.transactionForm.querySelector('#amount').value);
 
-    const transactions = getTransactions();
-    transactions.push({ type, amount });
-    saveTransactions(transactions);
+                const transactions = DashboardModule.methods.getTransactions();
+                transactions.push({ type, amount });
+                DashboardModule.methods.saveTransactions(transactions);
 
-    updateTransactionTable();
-    updateTransactionChart();
-    document.getElementById('transactionForm').reset();
-}
+                DashboardModule.methods.updateTransactionTable();
+                DashboardModule.methods.updateTransactionChart();
+                DashboardModule.htmlElements.transactionForm.reset();
+            },
 
-function updateTransactionTable() {
-    const transactions = getTransactions();
-    const tbody = document.getElementById('transactionTable').querySelector('tbody');
-    tbody.innerHTML = '';
+            handleLogout() {
+                AuthModule.methods.clearSession(); // Utiliza el método de AuthModule para cerrar sesión
+                window.location.href = 'index.html';
+            },
 
-    transactions.forEach(transaction => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `<td>${transaction.type}</td><td>${transaction.amount}</td>`;
-        tbody.appendChild(tr);
-    });
-}
+            toggleMenu() {
+                const menu = document.getElementById('menu');
+                menu.classList.toggle('show');
+            }
+        },
 
-function updateTransactionChart() {
-    const transactions = getTransactions();
-    const entradas = transactions.filter(t => t.type === 'entrada').reduce((sum, t) => sum + t.amount, 0);
-    const salidas = transactions.filter(t => t.type === 'salida').reduce((sum, t) => sum + t.amount, 0);
+        methods: {
+            loadDashboard() {
+                const username = AuthModule.methods.getSession(); // Utiliza el método de AuthModule para obtener la sesión
+                if (!username) {
+                    window.location.href = 'index.html';
+                    return;
+                }
 
-    const total = entradas + salidas;
-    const entradasPercent = total === 0 ? 0 : (entradas / total) * 100;
-    const salidasPercent = total === 0 ? 0 : (salidas / total) * 100;
+                // Limpiar datos almacenados al cargar el dashboard
+                localStorage.removeItem('transactions');
 
-    document.getElementById('barEntradas').style.height = `${entradasPercent}%`;
-    document.getElementById('barEntradas').textContent = `Entradas: ${entradas}`;
+                DashboardModule.htmlElements.usernameDisplay.textContent = username;
+                DashboardModule.methods.updateTransactionTable();
+                DashboardModule.methods.updateTransactionChart();
+            },
 
-    document.getElementById('barSalidas').style.height = `${salidasPercent}%`;
-    document.getElementById('barSalidas').textContent = `Salidas: ${salidas}`;
-}
+            updateTransactionTable() {
+                const transactions = DashboardModule.methods.getTransactions();
+                const tbody = DashboardModule.htmlElements.transactionTableBody;
+                tbody.innerHTML = '';
 
-function getTransactions() {
-    return JSON.parse(localStorage.getItem('transactions')) || [];
-}
+                transactions.forEach(transaction => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `<td>${transaction.type}</td><td>${transaction.amount}</td>`;
+                    tbody.appendChild(tr);
+                });
+            },
 
-function saveTransactions(transactions) {
-    localStorage.setItem('transactions', JSON.stringify(transactions));
-}
+            updateTransactionChart() {
+                const transactions = DashboardModule.methods.getTransactions();
+                const entradas = transactions.filter(t => t.type === 'entrada').reduce((sum, t) => sum + t.amount, 0);
+                const salidas = transactions.filter(t => t.type === 'salida').reduce((sum, t) => sum + t.amount, 0);
 
-function toggleMenu() {
-    const menu = document.getElementById('menu');
-    menu.classList.toggle('show');
-}
+                const total = entradas + salidas;
+                const entradasPercent = total === 0 ? 0 : (entradas / total) * 100;
+                const salidasPercent = total === 0 ? 0 : (salidas / total) * 100;
 
-document.addEventListener('DOMContentLoaded', loadDashboard);
-document.getElementById('transactionForm').addEventListener('submit', handleTransaction);
-document.getElementById('logoutButton').addEventListener('click', handleLogout);
-document.getElementById('logoutMenu').addEventListener('click', handleLogout);
-document.getElementById('menuToggle').addEventListener('click', toggleMenu);
+                DashboardModule.htmlElements.barEntradas.style.height = `${entradasPercent}%`;
+                DashboardModule.htmlElements.barEntradas.textContent = `Entradas: ${entradas}`;
+
+                DashboardModule.htmlElements.barSalidas.style.height = `${salidasPercent}%`;
+                DashboardModule.htmlElements.barSalidas.textContent = `Salidas: ${salidas}`;
+            },
+
+            getTransactions() {
+                return JSON.parse(localStorage.getItem('transactions')) || [];
+            },
+
+            saveTransactions(transactions) {
+                localStorage.setItem('transactions', JSON.stringify(transactions));
+            }
+        }
+    };
+
+    const AuthModule = {
+        methods: {
+            getSession() {
+                return localStorage.getItem('session');
+            },
+
+            clearSession() {
+                localStorage.removeItem('session');
+            }
+        }
+    };
+
+    DashboardModule.init();
+})();

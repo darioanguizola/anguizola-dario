@@ -1,67 +1,137 @@
-const usersKey = 'users';
-const sessionKey = 'session';
+(() => {
+    const AuthModule = {
+        keys: {
+            users: 'users',
+            session: 'session',
+        },
 
-function hashPassword(password) {
-    return btoa(password); // Simple hash usando base64 (sin sal)
-}
+        htmlElements: {
+            loginForm: document.getElementById('loginForm'),
+            registerForm: document.getElementById('registerForm'),
+            usernameInput: document.getElementById('username'),
+            passwordInput: document.getElementById('password'),
+            nameInput: document.getElementById('name'),
+            logoutButton: document.getElementById('logoutButton'),
+        },
 
-function getUsers() {
-    return JSON.parse(localStorage.getItem(usersKey)) || [];
-}
+        init() {
+            this.bindEvents();
+        },
 
-function saveUsers(users) {
-    localStorage.setItem(usersKey, JSON.stringify(users));
-}
+        bindEvents() {
+            if (this.htmlElements.loginForm) {
+                this.htmlElements.loginForm.addEventListener('submit', this.handlers.handleLogin);
+            }
+            if (this.htmlElements.registerForm) {
+                this.htmlElements.registerForm.addEventListener('submit', this.handlers.handleRegister);
+            }
+            if (this.htmlElements.logoutButton) {
+                this.htmlElements.logoutButton.addEventListener('click', this.handlers.handleLogout);
+            }
+            window.addEventListener('load', this.handlers.checkSession);
+        },
 
-function getSession() {
-    return localStorage.getItem(sessionKey);
-}
+        handlers: {
+            handleLogin(event) {
+                event.preventDefault();
+                const username = AuthModule.htmlElements.usernameInput.value;
+                const password = AuthModule.htmlElements.passwordInput.value;
+                AuthModule.methods.login(username, password);
+            },
 
-function setSession(username) {
-    localStorage.setItem(sessionKey, username);
-}
+            handleRegister(event) {
+                event.preventDefault();
+                const username = AuthModule.htmlElements.usernameInput.value;
+                const name = AuthModule.htmlElements.nameInput ? AuthModule.htmlElements.nameInput.value : '';
+                const password = AuthModule.htmlElements.passwordInput.value;
+                AuthModule.methods.register(username, name, password);
+            },
 
-function clearSession() {
-    localStorage.removeItem(sessionKey);
-}
+            handleLogout() {
+                AuthModule.methods.logout();
+            },
 
-function handleLogin(event) {
-    event.preventDefault();
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-    const hashedPassword = hashPassword(password);
+            checkSession() {
+                if (window.location.pathname.includes('dashboard.html') || window.location.pathname.includes('profile.html')) {
+                    AuthModule.methods.verifySession();
+                }
+            }
+        },
 
-    const users = getUsers();
-    const user = users.find(user => user.username === username && user.password === hashedPassword);
+        methods: {
+            hashPassword(password) {
+                return btoa(password); // Simple hash using base64 (without salt)
+            },
 
-    if (user) {
-        setSession(username);
-        window.location.href = 'dashboard.html';
-    } else {
-        alert('Usuario o contraseña incorrectos');
-    }
-}
+            getUsers() {
+                return JSON.parse(localStorage.getItem(AuthModule.keys.users)) || [];
+            },
 
-function handleRegister(event) {
-    event.preventDefault();
-    const username = document.getElementById('username').value;
-    const name = document.getElementById('name').value;
-    const password = document.getElementById('password').value;
-    const hashedPassword = hashPassword(password);
+            saveUsers(users) {
+                localStorage.setItem(AuthModule.keys.users, JSON.stringify(users));
+            },
 
-    const users = getUsers();
-    if (users.find(user => user.username === username)) {
-        alert('El nombre de usuario ya está en uso');
-        return;
-    }
+            getSession() {
+                return localStorage.getItem(AuthModule.keys.session);
+            },
 
-    users.push({ username, name, password: hashedPassword });
-    saveUsers(users);
-    alert('Registro exitoso');
-    window.location.href = 'index.html';
-}
+            setSession(username) {
+                localStorage.setItem(AuthModule.keys.session, username);
+            },
 
-function handleLogout() {
-    clearSession();
-    window.location.href = 'index.html';
-}
+            clearSession() {
+                localStorage.removeItem(AuthModule.keys.session);
+            },
+
+            login(username, password) {
+                const hashedPassword = this.hashPassword(password);
+                const users = this.getUsers();
+                const user = users.find(user => user.username === username && user.password === hashedPassword);
+
+                if (user) {
+                    this.setSession(username);
+                    window.location.href = 'dashboard.html';
+                } else {
+                    alert('Usuario o contraseña incorrectos');
+                }
+            },
+
+            register(username, name, password) {
+                const hashedPassword = this.hashPassword(password);
+                const users = this.getUsers();
+
+                if (users.find(user => user.username === username)) {
+                    alert('El nombre de usuario ya está en uso');
+                    return;
+                }
+
+                const customRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{6,}$/;
+                if (!customRegex.test(password)) {
+                    alert('Contraseña insegura');
+                    return;
+                }
+
+                users.push({ username, name, password: hashedPassword });
+                this.saveUsers(users);
+                alert('Registro exitoso');
+                window.location.href = 'index.html';
+            },
+
+            logout() {
+                this.clearSession();
+                window.location.href = 'index.html';
+            },
+
+            verifySession() {
+                const session = this.getSession();
+                if (!session) {
+                    window.location.href = 'index.html';
+                } else {
+                    document.getElementById('usernameDisplay').textContent = session;
+                }
+            }
+        }
+    };
+
+    AuthModule.init();
+})();
