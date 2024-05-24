@@ -40,7 +40,7 @@
             },
 
             handleLogout() {
-                AuthModule.methods.clearSession(); // Utiliza el método de AuthModule para cerrar sesión
+                AuthModule.methods.clearSession(); 
                 window.location.href = 'index.html';
             },
 
@@ -52,13 +52,13 @@
 
         methods: {
             loadDashboard() {
-                const username = AuthModule.methods.getSession(); // Utiliza el método de AuthModule para obtener la sesión
+                const username = AuthModule.methods.getSession(); 
                 if (!username) {
                     window.location.href = 'index.html';
                     return;
                 }
 
-                // Limpiar datos almacenados al cargar el dashboard
+                
                 localStorage.removeItem('transactions');
 
                 DashboardModule.htmlElements.usernameDisplay.textContent = username;
@@ -84,14 +84,19 @@
                 const salidas = transactions.filter(t => t.type === 'salida').reduce((sum, t) => sum + t.amount, 0);
 
                 const total = entradas + salidas;
-                const entradasPercent = total === 0 ? 0 : (entradas / total) * 100;
-                const salidasPercent = total === 0 ? 0 : (salidas / total) * 100;
+                
+                const entradasPercent = total === 0 ? 0 : ((entradas - salidas) / entradas) * 100;
+                const salidasPercent = total === 0 ? 0 : (salidas / entradas) * 100;
+
+
+
+
 
                 DashboardModule.htmlElements.barEntradas.style.height = `${entradasPercent}%`;
-                DashboardModule.htmlElements.barEntradas.textContent = `Entradas: ${entradas}`;
+                DashboardModule.htmlElements.barEntradas.textContent = `Entradas: ${entradas} (${entradasPercent.toFixed(2)}%)`;
 
                 DashboardModule.htmlElements.barSalidas.style.height = `${salidasPercent}%`;
-                DashboardModule.htmlElements.barSalidas.textContent = `Salidas: ${salidas}`;
+                DashboardModule.htmlElements.barSalidas.textContent = `Salidas: ${salidas} (${salidasPercent.toFixed(2)}%)`;
             },
 
             getTransactions() {
