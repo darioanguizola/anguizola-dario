@@ -1,0 +1,270 @@
+body {
+    background-image: url('img/login.png'); /* Imagen de fondo para el body */
+    background-size: cover; /* Ajustar la imagen al tamaño de la pantalla */
+    background-position: center; /* Posicionar la imagen en el centro */
+    background-repeat: no-repeat; /* Evitar que la imagen se repita */
+    height: 100vh; /* Altura del body al 100% del viewport */
+    margin: 0; /* Eliminar márgenes predeterminados */
+}
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 15px 0;
+}
+
+h1 {
+    margin: 0;
+}
+
+main {
+    padding: 50px;
+}
+
+.login {
+    background-color: rgba(255, 255, 255, 0.8); 
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    margin: 50px auto;
+}
+
+.input-email[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.input-general[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.input-loginpsw[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+
+
+.registro {
+     background-color: rgba(255, 255, 255, 0.8); 
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 600px;
+    margin: 50px auto;
+    max-width: 600px;
+    overflow-y: auto; /* Activar scroll si es necesario */
+    height: 500px; /* Altura inicial del contenedor */
+
+    
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+select {
+    width: 75%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px
+}
+
+button[type="submit"] {
+    background-color: #24bd9c;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 5rem;
+    
+}
+
+button[type="submit"]:hover {
+    background-color: #222;
+    
+}
+
+a {
+    color: #333;
+    text-decoration: none;
+}
+
+/* Estilos adicionales para formularios receptivos (opcional) */
+
+@media (max-width: 768px) {
+    .login {
+        width: 90%;
+    }
+}
+
+/*------intermedio----------------*/
+/* Estilos previos (incluyendo imagen de fondo de pantalla completa) */
+
+.eleccion-registro {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 600px;
+    margin: 50px auto;
+}
+
+.opciones-registro {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.opcion-registro {
+    display: block;
+    text-align: center;
+    margin-bottom: 20px;
+    width: 250px;
+    cursor: pointer;
+}
+
+.opcion-registro i {
+    font-size: 40px; /* Tamaño del ícono */
+    margin-bottom: 10px;
+    color: #333; /* Color del ícono */
+}
+
+.opcion-registro h3 {
+    margin: 0;
+    color: #333;
+}
+
+/* Estilos para el botón cuadrado bonito (opcional) */
+
+.opcion-registro:hover {
+    background-color: #21b89f;
+    border-radius: 5px;
+}
+
+/* Estilos adicionales para formularios receptivos (opcional) */
+
+@media (max-width: 768px) {
+    .eleccion-registro,
+    .opciones-registro {
+        flex-direction: column;
+    }
+
+    .opcion-registro {
+        width: 100%;
+    }
+}
+
+/* Listado de enfermeras */
+/* Estilos previos (asumiendo que ya tienes estilos básicos) */
+
+/* Estilos previos (incluyendo imagen de fondo de pantalla completa) */
+
+.buscador {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.filtro {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.filtro label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.filtro select,
+.filtro input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 150px;
+}
+
+.listado-enfermeras {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.tarjeta-enfermera {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 300px; /* Ancho de cada tarjeta */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.tarjeta-enfermera img {
+    width: 150px; /* Ancho del logo */
+    height: 150px; /* Altura del logo */
+    border-radius: 50%; /* Forma circular para el logo */
+    object-fit: cover; /* Mantener la proporción de la imagen */
+    src: url('ruta/al/logo-usuario.png'); /* Reemplaza con la ruta correcta */
+    margin-bottom: 10px; /* Añadir margen inferior */
+}
+
+.tarjeta-enfermera h3 {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.tarjeta-enfermera p {
+    margin-bottom: 5px;
+}
+
+.tarjeta-enfermera a {
+    display: block;
+    padding: 10px 15px;
+    background-color: #337ab7;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+/* Estilos para ordenamiento (opcional) */
+
+.tarjeta-enfermera.orden-mayor-menor {
+    flex-order: -1; /* Ordenar de mayor a menor */
+}
