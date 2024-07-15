@@ -2,7 +2,7 @@ body {
     background-image: url('img/login.png'); /* Imagen de fondo para el body */
     background-size: cover; /* Ajustar la imagen al tamaño de la pantalla */
     background-position: center; /* Posicionar la imagen en el centro */
-    background-repeat: no-repeat; /* Evitar que la imagen se repita */
+    background-repeat: repeat; /* Evitar que la imagen se repita */
     height: 100vh; /* Altura del body al 100% del viewport */
     margin: 0; /* Eliminar márgenes predeterminados */
 }
